@@ -102,8 +102,10 @@ def home():
     return "LINE BOT đang hoạt động!"
 
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def webhook():
+    if request.method == "GET":
+        return "Webhook OK", 200
 
     signature = request.headers.get("X-Line-Signature", "")
     body = request.get_data()
